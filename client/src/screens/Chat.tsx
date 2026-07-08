@@ -70,7 +70,7 @@ export const Chat: React.FC<ChatProps> = ({ route, navigation }) => {
       const uploadResult = await uploadDocument(file.name, base64Data);
 
       if (uploadResult.success) {
-        const confirmText = `📄 **Document Uploaded**: "${file.name}" has been successfully uploaded and indexed into the RAG database. You can now ask me questions about its content!`;
+        const confirmText = `**Document Uploaded**: "${file.name}" has been successfully uploaded and indexed into the RAG database. You can now ask me questions about its content!`;
         
         const savedMsg = await createMessage(sessionId, 'bot', confirmText);
         setMessages((prev) => [...prev, savedMsg]);
@@ -183,13 +183,13 @@ export const Chat: React.FC<ChatProps> = ({ route, navigation }) => {
           <Text style={styles.headerTitle} numberOfLines={1}>
             {sessionTitle}
           </Text>
-          <Text style={styles.headerSubtitle}>ConnectWise Support Assistant</Text>
+          <Text style={styles.headerSubtitle}>KnowledgeBot Support Assistant</Text>
         </View>
         <TouchableOpacity onPress={loadMessages} style={styles.headerBtn}>
           <RefreshCw size={16} color={colors.navy} />
         </TouchableOpacity>
       </View>
-
+ 
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         style={styles.keyboardContainer}
@@ -210,9 +210,9 @@ export const Chat: React.FC<ChatProps> = ({ route, navigation }) => {
             onLayout={scrollToBottom}
             ListEmptyComponent={
               <View style={styles.emptyContainer}>
-                <Text style={styles.emptyTitle}>👋 Ask anything about ConnectWise</Text>
+                <Text style={styles.emptyTitle}>Ask anything about your documents</Text>
                 <Text style={styles.emptyText}>
-                  I can answer questions regarding security best practices, ports, encryption, MFA, and general setups.
+                  Type a query or tap the paperclip icon below to upload custom PDF manuals and query them instantly.
                 </Text>
               </View>
             }

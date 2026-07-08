@@ -4,6 +4,15 @@ import { parsePdfPages, chunkPdfPages, chunkFaqMarkdown, DocumentChunk } from '.
 import fs from 'fs';
 import path from 'path';
 
+interface SearchChunkRow {
+  content: string;
+  metadata: {
+    source: string;
+    pageNumber?: number;
+    [key: string]: unknown;
+  };
+}
+
 export const KnowledgeBotSchemaPlugin = makeExtendSchemaPlugin((build) => {
   return {
     typeDefs: gql`
@@ -206,7 +215,7 @@ export const KnowledgeBotSchemaPlugin = makeExtendSchemaPlugin((build) => {
 
             if (chunks.length > 0) {
               contextText = chunks
-                .map((c: any, index: number) => {
+                .map((c: SearchChunkRow, index: number) => {
                   const metadata = c.metadata;
                   const pageInfo = metadata.pageNumber ? ` Page ${metadata.pageNumber}` : '';
                   

@@ -1,5 +1,5 @@
 /// <reference path="./types.d.ts" />
-import pdf from 'pdf-parse';
+import pdf, { PDFPageData } from 'pdf-parse';
 
 export interface DocumentChunk {
   content: string;
@@ -18,7 +18,7 @@ export async function parsePdfPages(buffer: Buffer): Promise<{ page: number; tex
   const pages: { page: number; text: string }[] = [];
 
   const options = {
-    pagerender: async (pageData: any) => {
+    pagerender: async (pageData: PDFPageData) => {
       const textContent = await pageData.getTextContent();
       let lastY: number | undefined;
       let text = '';

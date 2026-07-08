@@ -12,13 +12,10 @@ The system runs **100% locally** on your machine—ensuring complete data privac
 
 ---
 
-## 📱 Screenshots
+## 🎬 Application Demo
+![App Demo](images/demo.gif)
 
-Here is a preview of the design system in action (example based on ConnectWise brand guidelines):
-
-| Dashboard Home Screen | In-Chat PDF Ingestion & Support |
-|:---:|:---:|
-| ![Home Screen](images/home_screen.jpg) | ![Chat Screen](images/chat_screen.png) |
+---
 
 ### 🎨 Color Palette Mockup Example
 ![Color Palette Mockup](images/color_mockup.png)

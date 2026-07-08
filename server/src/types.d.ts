@@ -1,4 +1,18 @@
 declare module 'pdf-parse' {
+  export interface PDFTextItem {
+    str: string;
+    transform: number[];
+  }
+
+  export interface PDFTextContent {
+    items: PDFTextItem[];
+  }
+
+  export interface PDFPageData {
+    getTextContent: () => Promise<PDFTextContent>;
+    pageIndex: number;
+  }
+
   interface PDFInfo {
     PDFFormatVersion: string;
     IsAcroFormPresent: boolean;
@@ -6,20 +20,20 @@ declare module 'pdf-parse' {
     IsLinearized: boolean;
     IsSignaturesPresent: boolean;
     IsXFAPresent: boolean;
-    [key: string]: any;
+    [key: string]: unknown;
   }
 
   interface PDFData {
     numpages: number;
     numrender: number;
     info: PDFInfo;
-    metadata: any;
+    metadata: unknown;
     text: string;
     version: string;
   }
 
   interface PDFOptions {
-    pagerender?: (pageData: any) => Promise<string> | string;
+    pagerender?: (pageData: PDFPageData) => Promise<string> | string;
     max?: number;
     version?: string;
   }

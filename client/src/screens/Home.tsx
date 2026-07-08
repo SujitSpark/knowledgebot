@@ -102,7 +102,7 @@ export const Home: React.FC<HomeProps> = ({ navigation }) => {
             </View>
             <View style={{ flex: 1 }}>
               <Text style={styles.newChatTitle}>Start Support Chat</Text>
-              <Text style={styles.newChatSub}>Resolve queries using ConnectWise official documents</Text>
+              <Text style={styles.newChatSub}>Resolve queries using your indexed documents</Text>
             </View>
             <ChevronRight size={20} color={colors.white} />
           </View>
@@ -132,7 +132,7 @@ export const Home: React.FC<HomeProps> = ({ navigation }) => {
             <View style={styles.emptyDocsCard}>
               <FileText size={24} color={colors.textSecondary} />
               <Text style={styles.emptyDocsText}>No documents indexed yet.</Text>
-              <Text style={styles.emptyDocsSub}>Go to Control Panel to upload files.</Text>
+              <Text style={styles.emptyDocsSub}>Start a chat to upload and index files.</Text>
             </View>
           ) : (
             <FlatList

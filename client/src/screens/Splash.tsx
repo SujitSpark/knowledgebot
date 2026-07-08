@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ShieldAlert } from 'lucide-react-native';
+import { Bot } from 'lucide-react-native';
 import { colors } from '../theme/colors';
 import { typography } from '../theme/typography';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -39,11 +39,11 @@ export const Splash: React.FC<SplashProps> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
-        <ShieldAlert size={64} color={colors.primary} />
+        <Bot size={64} color={colors.tertiary} />
         <Text style={styles.appName}>KnowledgeBot</Text>
-        <Text style={styles.subtitle}>ConnectWise Support Assistant</Text>
+        <Text style={styles.subtitle}>KnowledgeBot Support Assistant</Text>
       </View>
-      <ActivityIndicator size="small" color={colors.primary} style={styles.loader} />
+      <ActivityIndicator size="small" color={colors.tertiary} style={styles.loader} />
     </View>
   );
 };

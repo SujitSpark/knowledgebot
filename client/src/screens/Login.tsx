@@ -4,7 +4,7 @@ import { loginUser, signupUser } from '../api/graphql';
 import { Button } from '../components/Button';
 import { colors } from '../theme/colors';
 import { typography } from '../theme/typography';
-import { ShieldCheck } from 'lucide-react-native';
+import { Bot } from 'lucide-react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 type RootStackParamList = {
@@ -55,7 +55,7 @@ export const Login: React.FC<LoginProps> = ({ navigation }) => {
       <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled">
         <View style={styles.header}>
           <View style={styles.iconContainer}>
-            <ShieldCheck size={40} color={colors.primary} />
+            <Bot size={40} color={colors.primary} />
           </View>
           <Text style={styles.title}>Welcome to KnowledgeBot</Text>
           <Text style={styles.subtitle}>Sign in to access ConnectWise Support</Text>
