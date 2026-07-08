@@ -13,7 +13,10 @@ The system runs **100% locally** on your machine—ensuring complete data privac
 ---
 
 ## 🎬 Application Demo
-![App Demo](images/demo.gif)
+
+<p align="center">
+  <img src="./images/demo.gif" width="300" alt="KnowledgeBot Demo"/>
+</p>
 
 ---
 
