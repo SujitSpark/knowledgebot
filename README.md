@@ -5,6 +5,8 @@
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-pgvector_HNSW-4169E1?style=for-the-badge&logo=postgresql)](https://www.postgresql.org/)
 [![Ollama](https://img.shields.io/badge/Ollama-Gemma_2B_&_Nomic-C5E654?style=for-the-badge&logo=ollama&logoColor=0D1025)](https://ollama.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-0D1025?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![Evals: DeepEval + promptfoo](https://img.shields.io/badge/Evals-DeepEval_%2B_promptfoo-29389A?style=for-the-badge)](evals/RESULTS.md)
+[![CI](https://github.com/SujitSpark/knowledgebot/actions/workflows/ci.yml/badge.svg)](https://github.com/SujitSpark/knowledgebot/actions/workflows/ci.yml)
 
 An advanced, offline-first local **RAG (Retrieval-Augmented Generation)** customer support mobile application. *(For example, configured to parse and answer queries using ConnectWise support documentation).*
 
@@ -64,6 +66,37 @@ The system runs **100% locally** on your machine—ensuring complete data privac
 4.  **Prompt Engineering**: Combines the aggregated top 5 context chunks, system instructions (representative persona, strict no-hallucination rules), and the user's question.
 5.  **Inference**: Local `gemma2:2b` processes the prompt and returns a response.
 6.  **Output**: Response is post-processed, user history is updated, citation references are resolved, and the bubble is pushed to the user.
+
+### C. Guardrails
+*   **Input guard**: blocks common prompt-injection and jailbreak phrasings before they reach the LLM.
+*   **Relevance gate**: questions whose nearest chunk is farther than `RAG_MAX_DISTANCE` are refused instead of answered from the model's own knowledge.
+*   **Output guard**: never returns text that echoes the system prompt, or that repeats injected quoted text found nowhere in the documentation.
+
+---
+
+## 🧪 LLM Evaluation & Red-Teaming
+
+KnowledgeBot ships with an automated evaluation suite in [`evals/`](evals/) that tests the **live** `askQuestion` API:
+
+*   **Golden dataset**: 25 cases (15 answerable, 5 out-of-scope, 5 adversarial).
+*   **DeepEval + pytest**: retrieval hit@5, key-fact correctness, citation accuracy, faithfulness and answer relevancy (local `qwen3:4b` judge), refusal behaviour and latency.
+*   **promptfoo red-team**: prompt injection, jailbreak, PII exfiltration and false-premise attacks, including phrasings that were never used to build the guardrails.
+
+The first run caught three bugs, which were fixed and are now regression tests:
+
+| Check | Before | After |
+|---|---|---|
+| Citation accuracy | 10/15 (67%) | **15/15** |
+| Out-of-scope refusal | 4/5 | **5/5** |
+| Guardrails (golden adversarial set) | 4/5 | **5/5** |
+| promptfoo red-team | 6/7 | **10/10** |
+
+Full write-up, including LLM-judge calibration and limitations: [`evals/RESULTS.md`](evals/RESULTS.md).
+
+```bash
+cd evals && python -m pytest -q          # needs the server running and Ollama models pulled
+npm --prefix ../server test              # fast guardrail unit tests, no Ollama needed (also runs in CI)
+```
 
 ---
 
